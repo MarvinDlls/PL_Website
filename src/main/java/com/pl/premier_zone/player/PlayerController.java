@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(path = "/player")
+@RequestMapping("/player")
 public class PlayerController {
 
     private final PlayerService playerService;
