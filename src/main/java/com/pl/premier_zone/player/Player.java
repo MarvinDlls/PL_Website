@@ -10,6 +10,7 @@ public class Player {
     private String name;
     private String nation;
     private String position;
+    private String cover;
     private Integer age;
     private Integer matchesPlayed;
     private Integer starts;
@@ -26,7 +27,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(String team, Double expectedAssists, Double expectedGoals, Double redCards, Double yellowCards, Double penaltiesScored, Double assists, Double goals, Double minutesPlayed, Integer starts, Integer matchesPlayed, Integer age, String position, String nation, String name) {
+    public Player(String team, Double expectedAssists, Double expectedGoals, Double redCards, Double yellowCards, Double penaltiesScored, Double assists, Double goals, Double minutesPlayed, Integer starts, Integer matchesPlayed, Integer age, String position, String nation, String name, String cover) {
         this.team = team;
         this.expectedAssists = expectedAssists;
         this.expectedGoals = expectedGoals;
@@ -42,6 +43,7 @@ public class Player {
         this.position = position;
         this.nation = nation;
         this.name = name;
+        this.cover = cover;
     }
 
     public Player(String name) {
@@ -166,5 +168,13 @@ public class Player {
 
     public void setTeam(String team) {
         this.team = team;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 }
