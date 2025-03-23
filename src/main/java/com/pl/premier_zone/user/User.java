@@ -1,11 +1,13 @@
 package com.pl.premier_zone.user;
 
+import com.pl.premier_zone.favourite.Favourite;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +22,30 @@ public class User {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favourite> favourites;
 
+    public User() {
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
+    // Getters et setters
     public Long getId() {
         return id;
     }
@@ -63,17 +82,15 @@ public class User {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public List<Favourite> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(List<Favourite> favourites) {
+        this.favourites = favourites;
     }
 }
-
-
