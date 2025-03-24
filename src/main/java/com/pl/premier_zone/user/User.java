@@ -93,4 +93,10 @@ public class User {
     public void setFavourites(List<Favourite> favourites) {
         this.favourites = favourites;
     }
+
+    public void setCreatedAt(LocalDateTime now) {
+    }
+
+    public void setUpdatedAt(LocalDateTime now) {
+    }
 }
