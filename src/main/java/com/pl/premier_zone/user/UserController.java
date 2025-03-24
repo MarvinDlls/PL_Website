@@ -1,5 +1,8 @@
 package com.pl.premier_zone.user;
 
+import com.pl.premier_zone.user.dto.UserRegisterDTO;
+import com.pl.premier_zone.user.dto.UserLoginDTO;
+
 import com.pl.premier_zone.security.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
