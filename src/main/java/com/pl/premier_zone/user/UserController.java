@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,11 +21,11 @@ import java.util.Map;
 public class UserController {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder; // Utilisation de PasswordEncoder
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder,
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder,
                           AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -32,7 +33,6 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-    // ✅ Route pour l'inscription
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserRegisterDTO userRegisterDTO) {
         if (userRepository.existsByEmail(userRegisterDTO.getEmail())) {
@@ -54,7 +54,6 @@ public class UserController {
         return ResponseEntity.ok("Utilisateur créé avec succès !");
     }
 
-    // ✅ Route pour la connexion
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserLoginDTO userLoginDTO) {
         authenticationManager.authenticate(
